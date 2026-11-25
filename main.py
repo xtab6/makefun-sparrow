@@ -23,6 +23,9 @@ def main() -> int:
     if text != text.strip() or not text:
         print("pitch must not be only whitespace", file=sys.stderr)
         return 1
+    if text.count(".") != 1 or not text.endswith(".") or "\n" in text:
+        print("pitch must be exactly one sentence on one line", file=sys.stderr)
+        return 1
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     # Clean only the CONTENTS of the output folder, never the folder itself:
